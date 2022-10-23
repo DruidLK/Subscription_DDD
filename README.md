@@ -1,1 +1,1 @@
-# SubscriptionDomainModel
+# Subscription Domain Model
