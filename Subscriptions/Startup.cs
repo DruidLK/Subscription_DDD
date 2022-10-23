@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Subscriptions.Infrastructure;
 
 namespace Subscriptions
 {
@@ -18,6 +20,14 @@ namespace Subscriptions
         {
 
             services.AddControllers();
+            services.AddDbContext<SubscriptionContext>(config =>
+            {
+                var connectionString =
+                    this.Configuration
+                          .GetConnectionString("SubscriptionConnection");
+
+                config.UseSqlServer(connectionString);
+            });
 
             services.AddSwaggerGen(config =>
             {
