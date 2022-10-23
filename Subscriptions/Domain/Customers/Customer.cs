@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using Subscriptions.Domain.Base;
-using Subscriptions.Domain.Subscriptions;
 using Subscriptions.Domain.ValueObjects;
 
 namespace Subscriptions.Domain.Customers
