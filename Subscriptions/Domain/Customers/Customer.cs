@@ -22,9 +22,8 @@ namespace Subscriptions.Domain.Customers
         public Customer(string Email, CustomerName CustomerName, decimal MoneySpent)
         {
             Id = Guid.NewGuid();
-            this.Email = Email;
-            this.CustomerName = CustomerName;
-            this.MoneySpent = MoneySpent;
+            this.Email = Email ?? throw new ArgumentNullException(nameof(Email));
+            this.CustomerName = CustomerName ?? throw new ArgumentNullException(nameof(CustomerName));
             this.subscriptions = new List<Subscription>();
         }
     }
