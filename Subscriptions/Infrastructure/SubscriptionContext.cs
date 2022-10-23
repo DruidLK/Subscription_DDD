@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Subscriptions.Domain.Customers;
 using Subscriptions.Domain.Products;
+using Subscriptions.Domain.Subscriptions;
 
 namespace Subscriptions.Infrastructure
 {
@@ -12,7 +13,9 @@ namespace Subscriptions.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder) =>
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(SubscriptionContext).Assembly);
+
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Subscription> Subscriptions { get; set; }
     }
 }

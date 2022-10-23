@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Subscriptions.Infrastructure;
 
@@ -11,9 +12,10 @@ using Subscriptions.Infrastructure;
 namespace Subscriptions.Migrations
 {
     [DbContext(typeof(SubscriptionContext))]
-    partial class SubscriptionContextModelSnapshot : ModelSnapshot
+    [Migration("20221023190904_CreateSubscriptionsWithRelationships")]
+    partial class CreateSubscriptionsWithRelationships
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -61,10 +63,10 @@ namespace Subscriptions.Migrations
 
             modelBuilder.Entity("Subscriptions.Domain.Subscriptions.Subscription", b =>
                 {
-                    b.Property<Guid>("CustomerId")
+                    b.Property<Guid>("ProductId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ProductId")
+                    b.Property<Guid>("CustomerId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<decimal>("Amount")
@@ -78,9 +80,9 @@ namespace Subscriptions.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("CustomerId", "ProductId");
+                    b.HasKey("ProductId", "CustomerId");
 
-                    b.HasIndex("ProductId");
+                    b.HasIndex("CustomerId");
 
                     b.ToTable("Subscriptions");
                 });
