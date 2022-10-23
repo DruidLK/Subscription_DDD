@@ -10,7 +10,7 @@ namespace Subscriptions.Infrastructure.config
         {
             builder.ToTable(nameof(Product));
             builder.HasKey(product => product.Id);
-            builder.Property(product => product.Id).HasColumnName("ProductId").ValueGeneratedOnAdd().IsRequired();
+            builder.Property(product => product.Id).HasColumnName("ProductId").ValueGeneratedNever().IsRequired();
             builder.Property(product => product.Name).HasMaxLength(100).IsRequired();
 
             builder.OwnsOne(product => product.Amount, productAmount =>

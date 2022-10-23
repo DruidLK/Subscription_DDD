@@ -11,7 +11,7 @@ namespace Subscriptions.Infrastructure.config
         {
             builder.ToTable(nameof(Customer));
             builder.HasKey(customer => customer.Id);
-            builder.Property(customer => customer.Id).ValueGeneratedOnAdd().IsRequired();
+            builder.Property(customer => customer.Id).ValueGeneratedNever().IsRequired();
 
             builder.OwnsOne(customer => customer.Email, customerEmail =>
             {

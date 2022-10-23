@@ -21,7 +21,7 @@ namespace Subscriptions.Infrastructure.config
             builder.Property(subscription => subscription.SubscriptionStatus)
                 .HasConversion(new EnumToStringConverter<SubscriptionStatus>()).IsRequired();
 
-            builder.Property(subscription => subscription.CurrentPeriondEndDate).IsRequired();
+            builder.Property(subscription => subscription.CurrentPeriodEndDate).IsRequired();
 
             builder.HasOne(subscription => subscription.Customer)
                .WithMany(customer => customer.Subscriptions)
