@@ -20,7 +20,8 @@ namespace Subscriptions.Infrastructure.config
             });
 
             builder.Property(product => product.BillingPeriod).HasColumnName(nameof(Product.BillingPeriod))
-                .HasConversion<string>();
+                .HasConversion(period => period.Name,
+                    name => BillingPeriod.FromName(name, true));
         }
     }
 }
