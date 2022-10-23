@@ -4,5 +4,5 @@
 
 
 Bussniss Rules: 
-If a customer spent more or equal to 100 give him a 20% discount on the amount, if more or equal to 1000 give him a 1000 discount.
+If a customer spent more or equal to 100 give him a 20% discount on the amount, if more or equal to 1000 give him a 50% discount.
 Customer needs to subscribe to the Product, and need to retrieve a list of products that is currently active by the user.
