@@ -16,17 +16,24 @@ namespace Subscriptions.Domain.Subscriptions
 
         public SubscriptionStatus SubscriptionStatus { get; private set; }
         public decimal Amount { get; private set; }
-        public DateTimeOffset CurrentPeriondEndDate { get; private set; }
+        public DateTimeOffset CurrentPeriodEndDate { get; private set; }
 
-        public Subscription(Guid customerId, Guid productId, Customer customer, Product product, decimal amount)
+        public Subscription(
+            Guid customerId,
+            Guid productId,
+            Customer customer,
+            Product product,
+            decimal amount,
+            DateTimeOffset currentPeriodEndDate)
             : this()
         {
             this.CustomerId = customerId;
-            this.ProductId = ProductId;
+            this.ProductId = productId;
             this.Customer = customer;
             this.Product = product;
             this.Amount = amount;
             this.SubscriptionStatus = SubscriptionStatus.Active;
+            this.CurrentPeriodEndDate = currentPeriodEndDate;
         }
     }
 }

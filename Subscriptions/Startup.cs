@@ -5,6 +5,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Subscriptions.Domain.Abstractions.ISubscriptions;
+using Subscriptions.Domain.Subscriptions.DomainServices;
 using Subscriptions.Infrastructure;
 
 namespace Subscriptions
@@ -20,6 +22,7 @@ namespace Subscriptions
         {
 
             services.AddControllers();
+            services.AddTransient<ISubscriptionAmountCalculator, SubscriptionAmountCalculator>();
             services.AddDbContext<SubscriptionContext>(config =>
             {
                 var connectionString =

@@ -8,3 +8,5 @@
 /Subscriptions/obj
 /Subscriptions/appsettings.json
 /Subscriptions/appsettings.Development.json
+/Subscriptions.Tests.Unit/obj
+/Subscriptions.Tests.Unit/bin/Debug/net6.0
