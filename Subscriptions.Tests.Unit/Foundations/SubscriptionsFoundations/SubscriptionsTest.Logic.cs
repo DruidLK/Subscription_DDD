@@ -15,10 +15,12 @@ namespace Subscriptions.Tests.Unit.Foundations.SubscriptionsFoundations
             const int Fifteen = 15;
 
             var customer =
-                new Customer(new Email("email"), new CustomerName("f","d"), MoneySpent: 99);
+                new Customer(new Email("email"), new CustomerName("f", "d"));
 
             var product =
                 new Product("f", new Money(15), BillingPeriod.Weekly);
+
+            customer.AddSubscription(product, customer, 15, DateTimeOffset.UtcNow);
 
             var expectedAmount = Fifteen;
 
@@ -26,6 +28,31 @@ namespace Subscriptions.Tests.Unit.Foundations.SubscriptionsFoundations
             var actualAmount =
                 this.subscriptionAmountCalculator
                     .Calculate(customer, product);
+
+            // Assert - Then
+            actualAmount.Should().Be(expectedAmount);
+        }
+
+        [Fact]
+        public void ShouldReturnSubscriptionAmountWithTwentyPercentDiscount()
+        {
+            // Arrange - Given
+            const int Twelve = 12;
+
+            var customer =
+                new Customer(new Email("email"), new CustomerName("f", "d"));
+
+            var product =
+                new Product("f", new Money(15), BillingPeriod.Weekly);
+
+            customer.AddSubscription(product, customer, 100, DateTimeOffset.UtcNow);
+
+            var expectedAmount = Twelve;
+
+            // Act - When
+            var actualAmount =
+                this.subscriptionAmountCalculator
+                        .Calculate(customer, product);
 
             // Assert - Then
             actualAmount.Should().Be(expectedAmount);
