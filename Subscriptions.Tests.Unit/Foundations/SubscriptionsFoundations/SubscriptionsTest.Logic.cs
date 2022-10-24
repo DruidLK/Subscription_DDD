@@ -57,5 +57,29 @@ namespace Subscriptions.Tests.Unit.Foundations.SubscriptionsFoundations
             // Assert - Then
             actualAmount.Should().Be(expectedAmount);
         }
+
+        [Fact]
+        public void ShouldReturnSubscriptionAmountWithFiftyPercentDiscount()
+        {
+            // Arrange - Given
+            var customer =
+                new Customer(new Email(""), new CustomerName("", ""));
+
+            var product =
+                new Product("", new Money(15), BillingPeriod.Weekly);
+
+            customer.AddSubscription(product, customer, 1000, DateTimeOffset.UtcNow);
+
+            var expectedAmount = 7.5M;
+
+            // Act - When
+            var actualAmount =
+                this.subscriptionAmountCalculator
+                        .Calculate(customer, product);
+
+            // Assert - Then
+            actualAmount.Should().Be(expectedAmount);
+
+        }
     }
 }
