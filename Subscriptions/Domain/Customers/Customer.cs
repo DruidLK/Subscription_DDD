@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Subscriptions.Domain.Base;
+using Subscriptions.Domain.Events;
 using Subscriptions.Domain.Products;
 using Subscriptions.Domain.Subscriptions;
 using Subscriptions.Domain.ValueObjects;
@@ -44,6 +45,8 @@ namespace Subscriptions.Domain.Customers
 
             this.subscriptions.Add(subscription);
             this.MoneySpent += subscription.Amount;
+
+            AddDomainEvent(new CustomerSubscribeToProduct(this.Id, product.Id));
         }
     }
 }
