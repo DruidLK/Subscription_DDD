@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Subscriptions.Domain.Customers;
 using Subscriptions.Domain.ValueObjects;
 
-namespace Subscriptions.Infrastructure.config
+namespace Subscriptions.Infrastructure.EFCoreConfig
 {
     public sealed class CustomerConfiguration : IEntityTypeConfiguration<Customer>
     {
@@ -19,11 +19,15 @@ namespace Subscriptions.Infrastructure.config
                 customerEmail.HasIndex(email => email.value).IsUnique();
             });
 
+            builder.Navigation(e => e.Email).IsRequired();
+
             builder.OwnsOne(customer => customer.CustomerName, customerName =>
             {
                 customerName.Property(name => name.FirstName).HasColumnName(nameof(Customer.CustomerName.FirstName)).HasMaxLength(300).IsRequired();
                 customerName.Property(name => name.LastName).HasColumnName(nameof(Customer.CustomerName.LastName)).HasMaxLength(300).IsRequired();
             });
+
+            builder.Navigation(e => e.CustomerName).IsRequired();
 
             builder.Property(customer => customer.MoneySpent).HasColumnType("money").HasColumnName(nameof(Customer.MoneySpent));
         }

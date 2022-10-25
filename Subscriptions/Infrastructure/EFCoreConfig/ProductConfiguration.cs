@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Subscriptions.Domain.Products;
 
-namespace Subscriptions.Infrastructure.config
+namespace Subscriptions.Infrastructure.EFCoreConfig
 {
     public sealed class ProductConfiguration : IEntityTypeConfiguration<Product>
     {

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Subscriptions.Domain.Subscriptions;
 
-namespace Subscriptions.Infrastructure.config
+namespace Subscriptions.Infrastructure.EFCoreConfig
 {
     public sealed class SubscriptionConfiguration : IEntityTypeConfiguration<Subscription>
     {
