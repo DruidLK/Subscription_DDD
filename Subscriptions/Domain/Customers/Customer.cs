@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using Subscriptions.Domain.Abstractions.ISubscriptions;
 using Subscriptions.Domain.Base;
 using Subscriptions.Domain.Events;
 using Subscriptions.Domain.Products;
 using Subscriptions.Domain.Subscriptions;
+using Subscriptions.Domain.Subscriptions.DomainServices;
 using Subscriptions.Domain.ValueObjects;
 
 namespace Subscriptions.Domain.Customers
@@ -31,17 +33,14 @@ namespace Subscriptions.Domain.Customers
 
         public void AddSubscription(
             Product product,
-            Customer customer,
-            decimal amount,
-            DateTimeOffset currentPeriodEndDate)
+            ISubscriptionAmountCalculator subscriptionAmountCalculator
+            )
         {
-            var subscription = new Subscription(
-                product.Id,
-                customer.Id,
-                this,
-                product,
-                amount,
-                currentPeriodEndDate);
+            var subscriptionAmount =
+                subscriptionAmountCalculator.Calculate(this, product);
+
+            var subscription =
+                new Subscription(this.Id, product.Id, this, product, subscriptionAmount);
 
             this.subscriptions.Add(subscription);
             this.MoneySpent += subscription.Amount;

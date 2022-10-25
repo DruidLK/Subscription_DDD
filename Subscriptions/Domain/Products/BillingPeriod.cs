@@ -19,5 +19,8 @@ namespace Subscriptions.Domain.Products
         public BillingPeriod(string name, int value, Func<DateTimeOffset> currentDateTime)
             : base(name, value) =>
                   this.currentDateTime = currentDateTime;
+
+        public DateTimeOffset GetCurrentDateTime() =>
+            this.currentDateTime();
     }
 }

@@ -6,9 +6,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using Subscriptions.Domain.Abstractions.IEmailNotifications;
 using Subscriptions.Domain.Abstractions.ISubscriptions;
 using Subscriptions.Domain.Subscriptions.DomainServices;
 using Subscriptions.Infrastructure;
+using Subscriptions.Infrastructure.EmailConfig;
 
 namespace Subscriptions
 {
@@ -25,6 +27,7 @@ namespace Subscriptions
             services.AddControllers();
             services.AddMediatR(typeof(Startup));
             services.AddTransient<ISubscriptionAmountCalculator, SubscriptionAmountCalculator>();
+            services.AddTransient<IEmailSender, EmailSender>();
             services.AddDbContext<SubscriptionContext>(config =>
             {
                 var connectionString =
@@ -34,6 +37,10 @@ namespace Subscriptions
                 config.UseSqlServer(connectionString);
             });
 
+            SwaggerDoc(services);
+        }
+
+        private static void SwaggerDoc(IServiceCollection services) =>
             services.AddSwaggerGen(config =>
             {
                 var openApiInfo = new OpenApiInfo
@@ -46,7 +53,6 @@ namespace Subscriptions
                     name: "v1",
                     info: openApiInfo);
             });
-        }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {

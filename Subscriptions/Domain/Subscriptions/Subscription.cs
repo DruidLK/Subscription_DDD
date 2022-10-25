@@ -23,8 +23,7 @@ namespace Subscriptions.Domain.Subscriptions
             Guid productId,
             Customer customer,
             Product product,
-            decimal amount,
-            DateTimeOffset currentPeriodEndDate)
+            decimal amount)
             : this()
         {
             this.CustomerId = customerId;
@@ -33,7 +32,7 @@ namespace Subscriptions.Domain.Subscriptions
             this.Product = product;
             this.Amount = amount;
             this.SubscriptionStatus = SubscriptionStatus.Active;
-            this.CurrentPeriodEndDate = currentPeriodEndDate;
+            this.CurrentPeriodEndDate = Product.BillingPeriod.GetCurrentDateTime();
         }
     }
 }
