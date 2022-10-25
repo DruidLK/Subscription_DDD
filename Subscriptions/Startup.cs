@@ -1,3 +1,4 @@
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,7 @@ namespace Subscriptions
         {
 
             services.AddControllers();
+            services.AddMediatR(typeof(Startup));
             services.AddTransient<ISubscriptionAmountCalculator, SubscriptionAmountCalculator>();
             services.AddDbContext<SubscriptionContext>(config =>
             {
